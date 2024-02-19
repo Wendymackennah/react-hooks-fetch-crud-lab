@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from "react";
-import QuestionItem from "./QuestionItem"; // Assuming you have a QuestionItem component
+import React from "react";
+import QuestionItem from "./QuestionItem";
 
-function QuestionList() {
-  const [questions, setQuestions] = useState([]);
-
-  useEffect(() => {
-    // Fetch questions when component mounts
-    fetch("http://localhost:4000/questions")
-      .then((response) => response.json())
-      .then((data) => setQuestions(data))
-      .catch((error) => console.error("Error fetching questions:", error));
-  }, []); // Empty dependency array ensures the effect runs only once after initial render
+function QuestionList({ quiz, setQuiz }) {
+  function handleDeleteQuestion(id) {
+    setQuiz(quiz.filter((question) => question.id !== id));
+  }
 
   return (
     <section>
       <h1>Quiz Questions</h1>
+
       <ul>
-        {/* Map through questions array and render QuestionItem components */}
-        {questions.map((question) => (
-          <QuestionItem key={question.id} question={question} />
+        {quiz.map((question) => (
+          <QuestionItem
+            key={question.id}
+            question={question}
+            onDeleteQuestion={handleDeleteQuestion}
+            setQuiz={setQuiz}
+            quiz={quiz}
+          />
         ))}
       </ul>
     </section>
   );
 }
-
 export default QuestionList;
