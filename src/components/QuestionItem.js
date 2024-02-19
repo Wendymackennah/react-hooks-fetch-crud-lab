@@ -59,18 +59,28 @@ function QuestionItem({ question, onDeleteQuestion, setQuiz, quiz }) {
 
   return (
     <li>
-      <div>
-        <strong>Prompt: </strong>
-        {prompt}
-      </div>
-      <div>
-        <strong>Answers: </strong>
-        <select value={selectedAnswer} onChange={handleCorrectAnswerChange}>
-          {options}
-        </select>
-      </div>
+      <h4> Question {id}</h4>
+      <h5> Prompt:{prompt}</h5>
+      <label>
+        Correct Answer:
+        <select defaultValue={correctIndex}>{options}</select>
+      </label>
       <button onClick={handleDeleteClick}>Delete Question</button>
     </li>
+
+    // <li>
+    //   <div>
+    //     <strong>Prompt: </strong>
+    //     {prompt}
+    //   </div>
+    //   <div>
+    //     <strong>Answers: </strong>
+    //     <select value={selectedAnswer} onChange={handleCorrectAnswerChange}>
+    //       {options}
+    //     </select>
+    //   </div>
+    //   <button onClick={handleDeleteClick}>Delete Question</button>
+    // </li>
   );
 }
 
